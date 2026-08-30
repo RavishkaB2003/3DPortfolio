@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 #index.js personal information
-constants/index.js
+src/constants/index.js
