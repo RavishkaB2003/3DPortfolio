@@ -1,35 +1,61 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 @theme {
-  --color-konoha-bg: #090a0f;
-  --color-konoha-card: #12141d;
-  --color-konoha-border: #1e2235;
-  --color-konoha-orange: #ff6a00;
-  --color-konoha-amber: #f59e0b;
-  --color-konoha-crimson: #ef4444;
-  --color-konoha-muted: #94a3b8;
+  /* Custom fonts */
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+
+
+  /* Custom Colors*/
+  --color-noir: #070709;
+  --color-card-surface: #0e0f14;
+  --color-kage-orange: #ff6a00;
+  --color-kage-cyan: #00f0ff;
+  --color-muted-slate: #94a3b8;
+  --color-mono-zinc:#71717a;
+
+  /* Glass Border Strokes*/
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-border-hover: rgba(255, 255, 255, 0.25);
 }
 
+
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    background-color: var(--color-konoha-bg);
-    color: #f8fafc;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  * {
+    box-sizing: border-box;
   }
 
-  /* Custom subtle scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-noir);
+    color: #ffffff;
+    font-family: var(--font-sans);
   }
-  ::-webkit-scrollbar-track {
-    background: #090a0f;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #1e2235;
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
+
+  /* Custom text selection highlight */
+  ::selection{
+    background-color: rgba(255, 106, 0, 0.3);
+    color: #ffffff;
+   }
+
+   /* Slim High-tech scrollbar*/
+   ::-webkit-scrollbar {
+    width: 6px;
+   }
+
+   ::-webkit-scrollbar-track{
+    background: #070709;
+   }
+
+   ::-webkit-scrollbar-thumb{
+    background: #181a24;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.05);
+   }
+
+   ::-webkit-scrollbar-thumb:hover{
     background: #ff6a00;
-  }
+   }
+  
 }
