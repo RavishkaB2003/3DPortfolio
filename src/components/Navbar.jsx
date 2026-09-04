@@ -1,5 +1,25 @@
 import React, {useState} from 'react'
 import {navLinks} from '../constants'
+import useScrambleText from "../hooks/useScrambleText";
+
+
+// Subcomponent for each link so it has its own independent scramble animation
+const NavLinkItem = ({ link, active, setActive }) => {
+  const { displayText, triggerScramble } = useScrambleText(`// ${link.title}`);
+
+  return (
+    <li
+      className={`${
+        active === link.title ? "text-kage-orange font-bold" : "text-zinc-400"
+      } font-mono text-xs lg:text-sm tracking-wider uppercase hover:text-kage-orange transition-colors duration-200 cursor-pointer select-none`}
+      onMouseEnter={triggerScramble}
+      onClick={() => setActive(link.title)}
+    >
+      <a href={`#${link.id}`}>{displayText}</a>
+    </li>
+  );
+};
+
 
 const Navbar = () => {
      
@@ -11,9 +31,9 @@ const Navbar = () => {
 
 
   return (
-    <nav className="fixed top-4 left-0 right-0 z-50 max-w-6xl mx-auto px-4 sm:px-6">
+    <nav className="fixed top-4 left-0 right-0 z-50 w-full max-w-[94%] mx-auto">
         {/* ThreEUI frosted glass dock container*/}
-        <div className=" w-full flex justify-between items-center bg-card-surface/80 backdrop-blur-md border border-white/10 py-3 px-6 rounded-xl shadow-2xl">
+        <div className=" w-full flex justify-between items-center bg-card-surface/80 backdrop-blur-md border border-white/10 py-3.5 px-8 rounded-xl shadow-2xl">
         {/*Monogram logo (SCROLLS TO TOP WHEN CLICKED)*/}
         <a
           href="#"
@@ -28,18 +48,16 @@ const Navbar = () => {
         </a>
 
         {/*Desktop Links and Mobile Menu*/ }
-        <ul className="list-none hidden md:flex flex-row gap-8 items-center">
-            {navLinks.map((link) => (
-                <li
-                key={link.id}
-                className={`${
-                    active === link.title ? "text-white" : "text-muted-slate"
-                } font-mono text-sm tracking-wider uppercase hover:text-kage-orange transition-colors duration-200 cursor-pointer`}
-                onClick = {() => setActive(link.title)}>
-                <a href={`#${link.id}`}>{`// ${link.title}`}</a>
-                
-                </li>
-            ))}
+                {/* Desktop Links with Live Scramble Glitch on Hover */}
+        <ul className="list-none hidden md:flex flex-row gap-12 lg:gap-14 items-center">
+          {navLinks.map((link) => (
+            <NavLinkItem
+              key={link.id}
+              link={link}
+              active={active}
+              setActive={setActive}
+            />
+          ))}
         </ul>
 
             {/* Resume CTA Button */}
